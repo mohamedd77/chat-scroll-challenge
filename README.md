@@ -65,7 +65,7 @@ This ensures correct visibility in both light and dark modes.
 
 ## Screen Recording
 
-> 📹 [Watch the demo on YouTube / attach video here]
+
 
 The recording demonstrates:
 1. ✅ Auto-scroll follows streaming content to the bottom automatically
