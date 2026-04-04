@@ -63,7 +63,7 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
     );
 
     _model = GenerativeModel(
-      model: 'gemini-2.5-flash-lite',
+      model: 'gemini-2.5-flash',
       apiKey: widget.geminiApiKey,
       safetySettings: [
         SafetySetting(HarmCategory.dangerousContent, HarmBlockThreshold.none),
@@ -115,7 +115,13 @@ class _GeminiChatScreenState extends State<GeminiChatScreen> {
     _autoScrollTimer?.cancel();
     _autoScrollTimer = Timer.periodic(
       const Duration(milliseconds: 100),
-      (_) => _scrollToBottom(),
+      (_) {
+        // ✅ addPostFrameCallback عشان Flutter web يكون خلّص الـ layout
+        // قبل ما نقرأ maxScrollExtent ونعمل jumpTo
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _scrollToBottom();
+        });
+      },
     );
   }
 
